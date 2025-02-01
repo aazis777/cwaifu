@@ -13,7 +13,8 @@ struct Waifu {
 // typedef for waifu structure
 typedef struct Waifu waifu;
 
-void cwaifu_menu();
+// cwaifu_menu function prototype
+void cwaifu_menu(void);
 // create waifu function prototype
 waifu *create_waifu(waifu **head, int id, char *name, int age, char *gender, char *profession);
 
@@ -29,5 +30,10 @@ void edit_waifu_by_id(waifu *head, int id, char *new_name, int new_age, char *ne
 // print waifu node function prototype
 void print_waifu(waifu *node);
 
+// handle_signal function prototype
+void handle_signal(int sig);
+
+// handle input string function prototype
+int is_valid_string(const char *str);
 
 #endif // CWAIFU_H
