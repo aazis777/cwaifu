@@ -1,0 +1,8 @@
+BasedOnStyle: LLVM
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterStruct: false
+  AfterClass: false
+ColumnLimit: 120
