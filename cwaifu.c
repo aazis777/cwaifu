@@ -8,41 +8,18 @@
 
 int main(void) {
 
+  // handle signal (CTRL + C)
   signal(SIGINT, handle_signal);
 
+  // entry program
   cwaifu_menu();
-  // waifu *head = NULL; // Pointer for waifu's collection (linked list)
-
-  // Add some waifu
-  // create_waifu(&head, 1, "Yukino", 19, "Female", "Student");
-  // create_waifu(&head, 2, "Mikasa", 20, "Female", "Soldier");
-  // create_waifu(&head, 3, "Rem", 12, "Female", "Maid");
-
-  // Print all waifus
-  /*   print_waifu(head); */
-
-  // Search waifu based on ID
-  // waifu *found_waifu = find_waifu_by_id(head, 2);
-  // if (found_waifu) {
-  //   printf("Found Waifu by ID 2: %s\n", found_waifu->name);
-  // }
-
-  // Search waifu based on name
-  // found_waifu = find_waifu_by_name(head, "Rem");
-  // if (found_waifu) {
-  //   printf("Found Waifu by Name: %s\n", found_waifu->name);
-  // }
-
-  // Edit waifu based on ID
-  // edit_waifu_by_id(head, 2, "Mikasa Ackerman", 21, "Female", "Captain");
-  // printf("After editing:\n");
-  // print_waifu(head);
 
   return 0;
 }
 
 void cwaifu_menu(void) {
 
+  // initialize
   waifu *head = NULL;
   int id;
   char name[100];
@@ -53,6 +30,12 @@ void cwaifu_menu(void) {
   char input[100];
   int choice = 0;
 
+  // add some waifu
+  create_waifu(&head, 1, "Yukinoshita Yukino", 19, "Female", "Student");
+  create_waifu(&head, 2, "Mikasa Ackerman", 20, "Female", "Soldier");
+  create_waifu(&head, 3, "Rem", 14, "Female", "Maid");
+
+  // program loops
   while (choice != 5) {
     printf("\n");
     printf("welcome to CWaifu!\n");
@@ -66,6 +49,7 @@ void cwaifu_menu(void) {
 
     printf("enter your choice: ");
 
+    // input validation
     if (fgets(input, sizeof(input), stdin)) {
       input[strcspn(input, "\n")] = 0;
 
@@ -84,6 +68,7 @@ void cwaifu_menu(void) {
         ;
       }
 
+      // switch statements
       switch (choice) {
       case 1:
         printf("\nyou selected: \'create_waifu\'\n");
@@ -100,7 +85,7 @@ void cwaifu_menu(void) {
         while (getchar() != '\n')
           ;
 
-        printf("enter the name        : ");
+        printf("enter the name: ");
 
         if (fgets(name, sizeof(name), stdin)) {
           name[strcspn(name, "\n")] = 0;
@@ -116,7 +101,7 @@ void cwaifu_menu(void) {
           }
         }
 
-        printf("enter the age         : ");
+        printf("enter the age: ");
 
         if (fgets(input, sizeof(input), stdin)) {
           input[strcspn(input, "\n")] = 0;
@@ -135,7 +120,7 @@ void cwaifu_menu(void) {
             exit(0);
           }
 
-          printf("enter the gender      : ");
+          printf("enter the gender: ");
 
           if (fgets(gender, sizeof(gender), stdin)) {
             gender[strcspn(gender, "\n")] = 0;
@@ -151,7 +136,7 @@ void cwaifu_menu(void) {
             }
           }
 
-          printf("enter the profession  : ");
+          printf("enter the profession: ");
           if (fgets(profession, sizeof(profession), stdin)) {
             profession[strcspn(profession, "\n")] = 0;
 
@@ -180,9 +165,69 @@ void cwaifu_menu(void) {
           break;
         case 3:
           printf("you selected: find_waifu_by_id\n");
+          printf("\n");
+          printf("enter the waifu id: ");
+
+          if (scanf("%d", &id) != 1) {
+            printf("id must be a number.\n");
+
+            while (getchar() != '\n')
+              exit(0);
+          }
+
+          while (getchar() != '\n')
+            ;
+
+          waifu *found_waifu = find_waifu_by_id(head, id);
+
+          if (found_waifu) {
+            printf("found waifu with id: %d\n", id);
+            printf("\n");
+            printf("id: %d\n", found_waifu->id);
+            printf("name: %s\n", found_waifu->name);
+            printf("age: %d\n", found_waifu->age);
+            printf("gender: %s\n", found_waifu->gender);
+            printf("profession: %s\n", found_waifu->profession);
+          } else {
+            printf("waifu with id: %d not found.\n", found_waifu->id);
+            exit(0);
+          }
+
           break;
         case 4:
           printf("you selected: find_waifu_by_name\n");
+          printf("\n");
+          printf("enter the name waifu name: ");
+
+          if (fgets(name, sizeof(name), stdin)) {
+            name[strcspn(name, "\n")] = 0;
+
+            if (strlen(name) == 0) {
+              printf("name could not be empty.\n");
+              exit(0);
+            }
+
+            if (!is_valid_string(name)) {
+              printf("name must only contain letters.\n");
+              exit(0);
+            }
+          }
+
+          found_waifu = find_waifu_by_name(head, name);
+
+          if (found_waifu) {
+            printf("found waifu with name: %s\n", name);
+            printf("\n");
+            printf("id: %d\n", found_waifu->id);
+            printf("name: %s\n", found_waifu->name);
+            printf("age: %d\n", found_waifu->age);
+            printf("gender: %s\n", found_waifu->gender);
+            printf("profession: %s\n", found_waifu->profession);
+          } else {
+            printf("waifu with name: %s not found.\n", found_waifu->name);
+            exit(0);
+          }
+
           break;
         case 5:
           printf("thanks for using CWaifu program!\n");
@@ -202,7 +247,7 @@ waifu *create_waifu(waifu **head, int id, char *name, int age, char *gender, cha
     printf("error allocating memory for new waifu.\n");
     return NULL;
   }
-  // Add some waifu
+  // add some waifu
 
   new_waif->id = id;
   new_waif->name = strdup(name);
@@ -211,11 +256,11 @@ waifu *create_waifu(waifu **head, int id, char *name, int age, char *gender, cha
   new_waif->profession = profession;
   new_waif->next = NULL;
 
-  // Conditional lists
+  // conditional lists
   if (*head == NULL) {
     *head = new_waif;
   } else {
-    // Pointing next if waifu already exists
+    // pointing next if waifu already exists
     waifu *temp = *head;
     while (temp->next != NULL) {
       temp = temp->next;
@@ -232,7 +277,7 @@ void print_waifu(waifu *node) {
     return;
   }
 
-  // Print waifu while not NULL
+  // print waifu while not NULL
   while (node != NULL) {
     printf("id: %d\n", node->id);
     printf("name: %s\n", node->name);
@@ -246,7 +291,7 @@ void print_waifu(waifu *node) {
 }
 
 waifu *find_waifu_by_id(struct Waifu *head, int id) {
-  // Loops
+  // loops
   waifu *current = head;
   while (current != NULL) {
     // if id matched to current
@@ -262,7 +307,7 @@ waifu *find_waifu_by_id(struct Waifu *head, int id) {
 waifu *find_waifu_by_name(struct Waifu *head, char *name) {
   waifu *current = head;
 
-  // Loops
+  // loops
   while (current != NULL) {
     // if current->name equals to name
     if (strcmp(current->name, name) == 0) {
@@ -276,8 +321,8 @@ waifu *find_waifu_by_name(struct Waifu *head, char *name) {
 
 void edit_waifu_by_id(struct Waifu *head, int id, char *new_name, int new_age, char *new_gender, char *new_profession) {
   waifu *waifu = find_waifu_by_id(head, id);
-  // Conditional
-  // If waifu exists then edit existing
+  // conditional
+  // if waifu exists then edit existing
   if (waifu != NULL) {
     waifu->name = new_name;
     waifu->age = new_age;
