@@ -1,7 +1,7 @@
 # .clang-format CWaifu
 BasedOnStyle: Google
-IndentWidth: 2
-TabWidth: 2
+IndentWidth: 4
+TabWidth: 4
 UseTab: Never
 ColumnLimit: 80
 AllowShortFunctionsOnASingleLine: InlineOnly

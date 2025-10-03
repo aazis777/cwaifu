@@ -5,12 +5,12 @@
 
 struct Waifu
 {
-  int           id;
-  char         *name;
-  int           age;
-  char         *gender;
-  char         *profession;
-  struct Waifu *next;
+    int           id;
+    char         *name;
+    int           age;
+    char         *gender;
+    char         *profession;
+    struct Waifu *next;
 };
 
 // typedef for waifu structure
@@ -18,6 +18,7 @@ typedef struct Waifu waifu;
 
 // cwaifu_menu function prototype
 void cwaifu_menu(void);
+
 // create waifu function prototype
 waifu *create_waifu(waifu **head, int id, char *name, int age, char *gender,
                     char *profession);
