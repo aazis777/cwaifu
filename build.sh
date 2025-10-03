@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 CC=gcc
 FLAGS="-Wall -Wextra"
