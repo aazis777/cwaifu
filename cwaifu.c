@@ -6,17 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(void)
-{
-    // handle signal (CTRL + C)
-    signal(SIGINT, handle_signal);
-
-    // entry program
-    cwaifu_menu();
-
-    return 0;
-}
-
 void cwaifu_menu(void)
 {
     // initialize
@@ -302,4 +291,15 @@ void get_string_input(const char *prompt, char *buffer, size_t size)
         }
         printf("Invalid input. Please enter a valid string.\n");
     }
+}
+
+int main(void)
+{
+    // handle signal (CTRL + C)
+    signal(SIGINT, handle_signal);
+
+    // entry program
+    cwaifu_menu();
+
+    return 0;
 }
