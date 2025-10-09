@@ -4,7 +4,7 @@ CWaifu is a *Waifu Management Program*, it's weird to call that, but whatever. B
 ### Clone Repository
 
 ```sh
-git clone https://github.com/aziscwd/CWaifu.git
+git clone https://github.com/OkAzis/CWaifu.git
 cd ./CWaifu
 ```
 
