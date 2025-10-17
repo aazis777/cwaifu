@@ -3,22 +3,22 @@ CWaifu is a *Waifu Management Program*, it's weird to call that, but whatever. B
 
 ### Clone Repository
 
-```sh
-git clone https://github.com/OkAzis/CWaifu.git
-cd ./CWaifu
+```bash
+git clone https://github.com/aazis777/cwaifu.git
+cd ./cwaifu
 ```
 
 ### Build & Run Program
 1. Makefile
 
-```sh
+```bash
 # build and run
 make
 ```
 
 2. Bash
 
-```sh
+```bash
 # build
 ./build.sh
 # run
@@ -26,4 +26,4 @@ make
 ```
 
 ### Final Touch
-Thanks for visiting this repo, hope you have a great day.
+Thanks for visiting this repo, this is just a recreational project don't take it seriously. Hope you have a great day.
